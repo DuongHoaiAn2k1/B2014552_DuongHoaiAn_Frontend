@@ -33,6 +33,16 @@
           <i class="fas fa-address-card"></i>
         </h4>
         <ContactCard :contact="activeContact" />
+        <router-link
+          :to="{
+            name: 'contact.edit',
+            params: { id: activeContact._id },
+          }"
+        >
+          <span class="mt-2 badge badge-warning">
+            <i class="fas fa-edit"></i> Hiệu chỉnh</span
+          >
+        </router-link>
       </div>
     </div>
   </div>
@@ -42,13 +52,13 @@ import ContactCard from "@/components/ContactCard.vue";
 import InputSearch from "@/components/InputSearch.vue";
 import ContactList from "@/components/ContactList.vue";
 import ContactService from "@/services/contact.service";
+
 export default {
   components: {
     ContactCard,
     InputSearch,
     ContactList,
   },
-
   data() {
     return {
       contacts: [],
@@ -57,8 +67,8 @@ export default {
     };
   },
   watch: {
-    // Giám sát các thay đổ của biến searchText.
-    // Bỏ chon phần tử đang được chọn trong danh sách.
+    // Giám sát các thay đổi của biến searchText.
+    // Bỏ chọn phần tử đang được chọn trong danh sách.
     searchText() {
       this.activeIndex = -1;
     },
@@ -68,7 +78,7 @@ export default {
     contactStrings() {
       return this.contacts.map((contact) => {
         const { name, email, address, phone } = contact;
-        return [name, email, address, phone], join("");
+        return [name, email, address, phone].join("");
       });
     },
     // Trả về các contact có chứa thông tin cần tìm kiếm.
@@ -115,7 +125,6 @@ export default {
   mounted() {
     this.refreshList();
   },
-  // Đoạn mã xử lý đầy đủ sẽ trình bày bên dưới
 };
 </script>
 <style scoped>
