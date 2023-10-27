@@ -21,7 +21,7 @@ export default {
     async createContact(data) {
       try {
         await ContactService.create(data);
-        this.message = "Tạo liên hệ thành công nghe";
+        alert("Thêm liên hệ thành công!!");
       } catch (err) {
         console.log(err);
       }
